@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tristan's Matrix Links</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
@@ -86,26 +87,6 @@
 
     .header-content {
       flex: 1;
-    }
-
-    .matrix-face-icon {
-      width: 80px;
-      height: 80px;
-      margin-right: 1.5rem;
-      border: 2px solid #00ff00;
-      border-radius: 4px;
-      object-fit: cover;
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .matrix-face-icon {
-        width: 60px;
-        height: 60px;
-        margin-right: 1rem;
-        margin-bottom: 0.5rem;
-      }
     }
 
     .header h1 {
@@ -201,16 +182,19 @@
     }
 
     .category-icon {
-      width: 29px;
-      height: 29px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #00ff00;
-      border-radius: 2px;
-      font-size: 16px;
-      background: rgba(0, 255, 0, 0.1);
-      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      color: #00ff00;
+      font-size: 28px;
+    }
+
+    .category-icon.material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
     }
 
     .category-controls {
@@ -454,7 +438,6 @@
 
   <div class="container">
     <div class="header">
-      <img src="matrix_face.png" alt="Matrix Face" class="matrix-face-icon">
       <div class="header-content">
         <h1>// TG MATRIX ACCESS</h1>
         <p>PERSONAL LINK TERMINAL</p>
@@ -552,8 +535,19 @@
       canvas.height = window.innerHeight;
     });
 
+    const iconMap = {
+      'Main': 'link',
+      'Entertainment': 'tv',
+      'Commerce': 'shopping_cart',
+      'Gaming': 'gamepad',
+      'Documents': 'description',
+      'Development': 'code',
+      'Utility': 'settings',
+      'Finance & Home': 'account_balance'
+    };
+
     const defaultLinks = {
-      '🔗 Main': [
+      'Main': [
         {name: 'Gmail', url: 'https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox'},
         {name: 'Google Drive', url: 'https://drive.google.com/drive/u/0/my-drive'},
         {name: 'Google Sheets', url: 'https://docs.google.com/spreadsheets/u/0/'},
@@ -561,7 +555,7 @@
         {name: 'Ozbargain', url: 'https://www.ozbargain.com.au/deals/dominos.com.au'},
         {name: 'FootyTips', url: 'https://www.footytips.com.au/competitions/?competitionId=515397'}
       ],
-      '📺 Entertainment': [
+      'Entertainment': [
         {name: 'Netflix', url: 'https://www.netflix.com.au/'},
         {name: 'Plex Media', url: 'https://app.plex.tv/desktop/'},
         {name: 'FlixHDcc', url: 'https://flixhd.cc/'},
@@ -572,14 +566,14 @@
         {name: 'Y Flix to', url: 'https://yflix.to/'},
         {name: 'Spotify', url: 'https://www.spotify.com/au/'}
       ],
-      '🛒 Commerce': [
+      'Commerce': [
         {name: 'Amazon', url: 'https://www.amazon.com.au/'},
         {name: 'Google', url: 'https://www.google.com.au/'},
         {name: 'eBay', url: 'https://www.ebay.com.au/'},
         {name: 'GumTree', url: 'https://www.gumtree.com.au/'},
         {name: 'Dominos', url: 'https://order.dominos.com.au/'}
       ],
-      '🎮 Gaming': [
+      'Gaming': [
         {name: 'Discord', url: 'https://discord.com/channels/@me'},
         {name: 'Minecraft Tools', url: 'https://mc-map.djfun.de/'},
         {name: 'Poki Games', url: 'https://poki.com/'},
@@ -587,11 +581,11 @@
         {name: 'Console: Megadrive', url: 'https://megadrive-emulator.com/'},
         {name: 'Emulator Games', url: 'https://www.emugames.net/'}
       ],
-      '📄 Documents': [
+      'Documents': [
         {name: 'Cebuano Vocab', url: 'https://docs.google.com/spreadsheets/d/1Fg9IhYOLkG43VXM3caVU_CGfn2X7a7xrjy4E17INwiQ/edit'},
         {name: 'Budget', url: 'https://docs.google.com/spreadsheets/d/1E0wQIovpQ-ryQK2QKMmP_ccUBUx-3S2zeQxgEvqB2xY/'}
       ],
-      '💻 Development': [
+      'Development': [
         {name: 'Image Hosting', url: 'https://imgbb.com/'},
         {name: 'PNG to Icon', url: 'https://iconconvert.com/'},
         {name: 'Tinkercad', url: 'https://www.tinkercad.com/dashboard/designs/3d'},
@@ -599,14 +593,14 @@
         {name: 'Pixabay', url: 'https://pixabay.com/'},
         {name: 'Photo Editing', url: 'https://pixlr.com/x/'}
       ],
-      '⚙️ Utility': [
+      'Utility': [
         {name: 'Alexa Config', url: 'https://alexa.amazon.com/spa/index.html#cards'},
         {name: 'If This Then That', url: 'https://ifttt.com/'},
         {name: 'FlashCloud', url: 'https://cloud.sz3dp.com/main.html'},
         {name: 'Terra Master NAS', url: 'http://192.168.0.171:8181/tos/#/desktop'},
         {name: 'Unify Machine', url: 'https://unifi.ui.com/'}
       ],
-      '💰 Finance & Home': [
+      'Finance & Home': [
         {name: 'CommBank', url: 'https://www.commbank.com.au/'},
         {name: 'DoDo Gas', url: 'https://my.dodo.com/dashboard'},
         {name: 'LINK Tolls', url: 'https://www.linkt.com.au/campaigns/eway-redirect/sydney'},
@@ -615,7 +609,31 @@
     };
 
     let editMode = false;
-    let data = JSON.parse(localStorage.getItem('matrixLinks')) || JSON.parse(JSON.stringify(defaultLinks));
+    
+    const storedData = localStorage.getItem('matrixLinks');
+    let data;
+    
+    if (storedData) {
+      try {
+        const parsed = JSON.parse(storedData);
+        const hasCorrectCategories = Object.keys(defaultLinks).every(cat => cat in parsed);
+        const hasOldCategories = Object.keys(parsed).some(cat => 
+          cat.includes('STREAM') || cat.includes('NETWORK') || cat.includes('VAULT') || cat.includes('PROTOCOL') || cat.includes('DATABASE') || cat.includes('REPOSITORY') || cat.includes('[')
+        );
+        
+        if (hasOldCategories || !hasCorrectCategories) {
+          localStorage.removeItem('matrixLinks');
+          data = JSON.parse(JSON.stringify(defaultLinks));
+        } else {
+          data = parsed;
+        }
+      } catch (e) {
+        localStorage.removeItem('matrixLinks');
+        data = JSON.parse(JSON.stringify(defaultLinks));
+      }
+    } else {
+      data = JSON.parse(JSON.stringify(defaultLinks));
+    }
     
     Object.keys(defaultLinks).forEach(category => {
       if (!data[category]) {
@@ -654,9 +672,10 @@
         
         const titleDiv = document.createElement('div');
         titleDiv.className = 'category-title';
+        const iconName = iconMap[category] || 'link';
         titleDiv.innerHTML = `
-          <div class="category-icon">${category.charAt(0)}</div>
-          ${category.substring(2)}
+          <span class="category-icon material-symbols-outlined">${iconName}</span>
+          ${category}
         `;
         
         const controlsDiv = document.createElement('div');
