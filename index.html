@@ -595,100 +595,86 @@
 
     // Application logic
     const defaultCategories = [
-      'ENTERTAINMENT STREAM',
-      'COMMERCE NETWORK',
-      'GAMING VAULT',
-      'UTILITY PROTOCOL',
-      'WEB DEVELOPMENT',
-      'FINANCIAL DATABASE',
-      'DATA REPOSITORY',
-      'RESOURCE MATRIX'
+      '🔗 Main',
+      '📺 Entertainment',
+      '🛒 Commerce',
+      '🎮 Gaming',
+      '📄 Documents',
+      '💻 Development',
+      '⚙️ Utility',
+      '💰 Finance & Home'
     ];
 
     const categoryIcons = {
-      'ENTERTAINMENT STREAM': '📺',
-      'COMMERCE NETWORK': '🛒',
-      'GAMING VAULT': '🎮',
-      'UTILITY PROTOCOL': '⚙️',
-      'WEB DEVELOPMENT': '💻',
-      'FINANCIAL DATABASE': '💰',
-      'DATA REPOSITORY': '📊',
-      'RESOURCE MATRIX': '🔗'
+      '🔗 Main': '🔗',
+      '📺 Entertainment': '📺',
+      '🛒 Commerce': '🛒',
+      '🎮 Gaming': '🎮',
+      '📄 Documents': '📄',
+      '💻 Development': '💻',
+      '⚙️ Utility': '⚙️',
+      '💰 Finance & Home': '💰'
     };
 
     const defaultLinks = {
-      'ENTERTAINMENT STREAM': [
+      '🔗 Main': [
+        {name: 'Gmail', url: 'https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox'},
+        {name: 'Google Drive', url: 'https://drive.google.com/drive/u/0/my-drive'},
+        {name: 'Google Sheets', url: 'https://docs.google.com/spreadsheets/u/0/'},
+        {name: 'NRL', url: 'https://www.nrl.com.au/'},
+        {name: 'Ozbargain', url: 'https://www.ozbargain.com.au/deals/dominos.com.au'},
+        {name: 'FootyTips', url: 'https://www.footytips.com.au/competitions/?competitionId=515397'}
+      ],
+      '📺 Entertainment': [
         {name: 'Netflix', url: 'https://www.netflix.com.au/'},
-        {name: 'Disney Channel', url: 'https://www.disneyplus.com/'},
-        {name: 'Stan', url: 'https://play.stan.com.au/'},
         {name: 'Plex Media', url: 'https://app.plex.tv/desktop/'},
         {name: 'FlixHDcc', url: 'https://flixhd.cc/'},
-        {name: 'Movie Box', url: 'https://www.movieboxpro.app/'},
         {name: 'Binge', url: 'https://binge.com.au/profile'},
         {name: 'YouTube', url: 'https://www.youtube.com/'},
-        {name: 'Amazon Video', url: 'https://www.amazon.com/Amazon-Video/b/?node=2858778011'}
+        {name: 'Amazon Video', url: 'https://www.amazon.com/Amazon-Video/b/?node=2858778011'},
+        {name: 'Y Flix Online', url: 'https://yflix.online/'},
+        {name: 'Y Flix to', url: 'https://yflix.to/'},
+        {name: 'Spotify', url: 'https://www.spotify.com/au/'}
       ],
-      'COMMERCE NETWORK': [
+      '🛒 Commerce': [
         {name: 'Amazon', url: 'https://www.amazon.com.au/'},
         {name: 'Google', url: 'https://www.google.com.au/'},
         {name: 'eBay', url: 'https://www.ebay.com.au/'},
-        {name: 'GumTree', url: 'https://www.gumtree.com.au/'}
+        {name: 'GumTree', url: 'https://www.gumtree.com.au/'},
+        {name: 'Dominos', url: 'https://order.dominos.com.au/'}
       ],
-      'GAMING VAULT': [
+      '🎮 Gaming': [
         {name: 'Discord', url: 'https://discord.com/channels/@me'},
         {name: 'Minecraft Tools', url: 'https://mc-map.djfun.de/'},
-        {name: 'Spotify', url: 'https://www.spotify.com/au/'},
-        {name: 'NRL', url: 'https://www.nrl.com.au/'},
-        {name: 'FootyTips', url: 'https://www.footytips.com.au/competitions/?competitionId=515397'},
-        {name: 'MS Dos Games', url: 'https://msdos-games.com/'},
-        {name: 'SNES Online', url: 'https://supernintendoemulator.com/'},
-        {name: 'Texas Holdem', url: 'https://apps.facebook.com/texas_holdem/index.php'},
-        {name: 'Emulator Games', url: 'https://www.emugames.net/'},
-        {name: 'Megadrive', url: 'https://megadrive-emulator.com/'}
+        {name: 'Poki Games', url: 'https://poki.com/'},
+        {name: 'Console: SNES', url: 'https://supernintendoemulator.com/'},
+        {name: 'Console: Megadrive', url: 'https://megadrive-emulator.com/'},
+        {name: 'Emulator Games', url: 'https://www.emugames.net/'}
       ],
-      'UTILITY PROTOCOL': [
-        {name: 'Gmail', url: 'https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox'},
+      '📄 Documents': [
         {name: 'Cebuano Vocab', url: 'https://docs.google.com/spreadsheets/d/1Fg9IhYOLkG43VXM3caVU_CGfn2X7a7xrjy4E17INwiQ/edit'},
-        {name: 'Grammar Check', url: 'https://www.grammarcheck.net/editor/'},
-        {name: 'Google Drive', url: 'https://drive.google.com/drive/u/0/my-drive'},
-        {name: 'My Gov', url: 'https://login.my.gov.au/'},
-        {name: 'My Passport', url: 'https://online.passports.gov.au/'},
+        {name: 'Budget', url: 'https://docs.google.com/spreadsheets/d/1E0wQIovpQ-ryQK2QKMmP_ccUBUx-3S2zeQxgEvqB2xY/'}
+      ],
+      '💻 Development': [
+        {name: 'Image Hosting', url: 'https://imgbb.com/'},
+        {name: 'PNG to Icon', url: 'https://iconconvert.com/'},
+        {name: 'Tinkercad', url: 'https://www.tinkercad.com/dashboard/designs/3d'},
+        {name: '3D Models', url: 'https://3d-gallery.xyzprinting.com/'},
+        {name: 'Pixabay', url: 'https://pixabay.com/'},
         {name: 'Photo Editing', url: 'https://pixlr.com/x/'}
       ],
-      'WEB DEVELOPMENT': [
-        {name: 'Image Hosting', url: 'https://imgbb.com/'},
-        {name: 'PNG to Icon', url: 'https://iconconvert.com/'}
+      '⚙️ Utility': [
+        {name: 'Alexa Config', url: 'https://alexa.amazon.com/spa/index.html#cards'},
+        {name: 'If This Then That', url: 'https://ifttt.com/'},
+        {name: 'FlashCloud', url: 'https://cloud.sz3dp.com/main.html'},
+        {name: 'Terra Master NAS', url: 'http://192.168.0.171:8181/tos/#/desktop'},
+        {name: 'Unify Machine', url: 'https://unifi.ui.com/'}
       ],
-      'FINANCIAL DATABASE': [
+      '💰 Finance & Home': [
         {name: 'CommBank', url: 'https://www.commbank.com.au/'},
         {name: 'DoDo Gas', url: 'https://my.dodo.com/dashboard'},
-        {name: 'Commsec', url: 'https://www.commsec.com.au/'},
         {name: 'LINK Tolls', url: 'https://www.linkt.com.au/campaigns/eway-redirect/sydney'},
-        {name: '3D Models', url: 'https://3d-gallery.xyzprinting.com/'},
-        {name: 'If This Then That', url: 'https://ifttt.com/'},
-        {name: 'Alexa Config', url: 'https://alexa.amazon.com/spa/index.html#cards'},
-        {name: 'Arlo Login', url: 'https://my.arlo.com/#/login'}
-      ],
-      'DATA REPOSITORY': [
-        {name: 'Realestate Sheet', url: 'https://docs.google.com/spreadsheets/d/19eabB0A0AFzOpyOXZavM8WI3UqJ1_lwLcMvKr1MSiNM/'},
-        {name: 'Study Meetings', url: 'https://docs.google.com/spreadsheets/d/1o4B2Pn0xO_zqIHh7Ye5AeIFMs4HkKoKyvx0DyYIEx7U/'},
-        {name: 'Activity Notes', url: 'https://docs.google.com/document/d/1TW1nf5mWKn_ePJGGX6O8pJYGTt_s1xZpeYvYZ-UuPBI/'},
-        {name: 'Budget', url: 'https://docs.google.com/spreadsheets/d/1E0wQIovpQ-ryQK2QKMmP_ccUBUx-3S2zeQxgEvqB2xY/'},
-        {name: 'RpData', url: 'https://access-api.corelogic.asia/access/loginPage.html'}
-      ],
-      'RESOURCE MATRIX': [
-        {name: 'Y Flix Online', url: 'https://yflix.online/'},
-        {name: 'Y Flix to', url: 'https://yflix.to/'},
-        {name: 'Terra Master NAS', url: 'http://192.168.0.171:8181/tos/#/desktop'},
-        {name: 'Unify Machine', url: 'https://unifi.ui.com/'},
-        {name: 'Ozbargain', url: 'https://www.ozbargain.com.au/deals/dominos.com.au'},
-        {name: 'Dominos', url: 'https://order.dominos.com.au/'},
-        {name: '1377x', url: 'https://www.1377x.to/'},
-        {name: 'Kick Ass Torrent', url: 'https://kickasstorrents.to/'},
-        {name: 'Pirate Bay', url: 'https://thepiratebay.torrentsbay.org/'},
-        {name: 'FlashCloud', url: 'https://cloud.sz3dp.com/main.html'},
-        {name: 'Pixabay', url: 'https://pixabay.com/'},
-        {name: 'Ticker CAD', url: 'https://www.tinkercad.com/dashboard/designs/3d'}
+        {name: 'My Gov', url: 'https://login.my.gov.au/'}
       ]
     };
 
