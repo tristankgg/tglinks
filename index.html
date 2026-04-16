@@ -441,7 +441,11 @@
         <input type="text" id="editLinkName" placeholder="Enter link name">
       </div>
       <div class="form-group">
-        <label>New Category</label>
+        <label>Link URL</label>
+        <input type="text" id="editLinkUrl" placeholder="Enter URL (e.g., https://example.com)">
+      </div>
+      <div class="form-group">
+        <label>Category</label>
         <select id="editLinkCategory"></select>
       </div>
       <div class="modal-buttons">
@@ -756,7 +760,9 @@
       currentEditLink = link;
       currentEditCategory = { category, index };
       const linkName = typeof link === 'string' ? link : link.name;
+      const linkUrl = typeof link === 'string' ? '#' : link.url;
       document.getElementById('editLinkName').value = linkName;
+      document.getElementById('editLinkUrl').value = linkUrl;
       const select = document.getElementById('editLinkCategory');
       select.innerHTML = Object.keys(data).map(cat => `<option value="${cat}">${cat}</option>`).join('');
       select.value = category;
@@ -801,6 +807,7 @@
 
     function saveEditLink() {
       const newName = document.getElementById('editLinkName').value.trim();
+      const newUrl = document.getElementById('editLinkUrl').value.trim();
       const newCategory = document.getElementById('editLinkCategory').value;
       
       if (!newName) {
@@ -809,15 +816,16 @@
       }
       
       const { category, index } = currentEditCategory;
-      const currentLink = data[category][index];
-      const currentUrl = typeof currentLink === 'string' ? '#' : currentLink.url;
+      const newLinkObject = {name: newName, url: newUrl || '#'};
       
       if (newCategory !== category) {
+        // Moving to a different category
         data[category].splice(index, 1);
         if (!data[newCategory]) data[newCategory] = [];
-        data[newCategory].push({name: newName, url: currentUrl});
+        data[newCategory].push(newLinkObject);
       } else {
-        data[category][index] = {name: newName, url: currentUrl};
+        // Updating in same category
+        data[category][index] = newLinkObject;
       }
       
       saveData();
@@ -846,6 +854,10 @@
     });
 
     document.getElementById('editLinkName').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') saveEditLink();
+    });
+
+    document.getElementById('editLinkUrl').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') saveEditLink();
     });
 
