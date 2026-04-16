@@ -617,6 +617,19 @@
 
     let editMode = false;
     let data = JSON.parse(localStorage.getItem('matrixLinks')) || JSON.parse(JSON.stringify(defaultLinks));
+    
+    // Migrate old string format to new object format
+    Object.keys(data).forEach(category => {
+      data[category] = data[category].map(item => {
+        if (typeof item === 'string') {
+          // Find matching link in defaultLinks
+          const defaultLink = defaultLinks[category].find(l => l.name === item);
+          return defaultLink || {name: item, url: '#'};
+        }
+        return item;
+      });
+    });
+    
     let draggedElement = null;
     let currentEditLink = null;
     let currentEditCategory = null;
@@ -703,6 +716,7 @@
               if (editMode) {
                 e.preventDefault();
               }
+              // Allow normal link navigation when not in edit mode
             };
             
             linksGrid.appendChild(linkBtn);
@@ -840,4 +854,3 @@
   </script>
 </body>
 </html>
-
