@@ -655,12 +655,19 @@
     let editMode = false;
     let data = JSON.parse(localStorage.getItem('matrixLinks')) || JSON.parse(JSON.stringify(defaultLinks));
     
+    // Ensure all default categories exist in data
+    defaultCategories.forEach(category => {
+      if (!data[category]) {
+        data[category] = defaultLinks[category] || [];
+      }
+    });
+    
     // Migrate old string format to new object format
     Object.keys(data).forEach(category => {
       data[category] = data[category].map(item => {
         if (typeof item === 'string') {
           // Find matching link in defaultLinks
-          const defaultLink = defaultLinks[category].find(l => l.name === item);
+          const defaultLink = defaultLinks[category] && defaultLinks[category].find(l => l.name === item);
           return defaultLink || {name: item, url: '#'};
         }
         return item;
