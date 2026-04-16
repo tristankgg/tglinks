@@ -19,9 +19,21 @@
       overflow-x: hidden;
     }
 
+    /* Matrix code background animation */
+    #matrixBackground {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.15;
+    }
+
+    /* Scanlines overlay */
     body::before {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
@@ -58,11 +70,12 @@
       border: 2px solid #00ff00;
       border-radius: 4px;
       padding: 2rem;
-      background: rgba(0, 255, 0, 0.05);
+      background: rgba(0, 0, 0, 0.7);
       box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      backdrop-filter: blur(10px);
     }
 
     .header-content {
@@ -119,29 +132,14 @@
     .categories { display: grid; gap: 2rem; }
 
     .category {
-      background: rgba(0, 255, 0, 0.05);
+      background: rgba(0, 0, 0, 0.6);
       border: 1px solid #00ff00;
       border-radius: 2px;
       padding: 2rem;
       box-shadow: 0 0 15px rgba(0, 255, 0, 0.2), inset 0 0 15px rgba(0, 255, 0, 0.05);
       position: relative;
       overflow: hidden;
-    }
-
-    .category::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
-      animation: shimmer 3s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
+      backdrop-filter: blur(10px);
     }
 
     .category-header {
@@ -180,6 +178,8 @@
     .category-controls {
       display: flex;
       gap: 0.5rem;
+      position: relative;
+      z-index: 3;
     }
 
     .icon-btn {
@@ -225,7 +225,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      background: rgba(0, 255, 0, 0.05);
+      background: rgba(0, 0, 0, 0.5);
       text-shadow: 0 0 5px #00ff00;
       font-family: 'Orbitron', monospace;
       letter-spacing: 0.5px;
@@ -292,13 +292,14 @@
     }
 
     .modal-content {
-      background: rgba(0, 255, 0, 0.08);
+      background: rgba(0, 0, 0, 0.9);
       border: 2px solid #00ff00;
       border-radius: 2px;
       padding: 2rem;
       max-width: 400px;
       width: 90%;
       box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+      backdrop-filter: blur(10px);
     }
 
     .modal-title {
@@ -392,6 +393,9 @@
   </style>
 </head>
 <body>
+  <!-- Matrix code background canvas -->
+  <canvas id="matrixBackground"></canvas>
+
   <div class="container">
     <div class="header">
       <div class="header-content">
@@ -443,6 +447,75 @@
   </div>
 
   <script>
+    // Matrix digital rain animation
+    const canvas = document.getElementById('matrixBackground');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const charSize = 20;
+    const columns = Math.ceil(canvas.width / charSize);
+    
+    // Initialize drops with random starting positions
+    const drops = Array(columns).fill(0).map(() => ({
+      y: Math.random() * canvas.height,
+      speed: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.5 + 0.5
+    }));
+
+    function drawMatrix() {
+      // Semi-transparent black background to create trail effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Set text properties
+      ctx.fillStyle = '#00ff00';
+      ctx.font = `bold ${charSize}px 'Courier New', monospace`;
+      ctx.shadowColor = '#00ff00';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+
+      for (let i = 0; i < drops.length; i++) {
+        const drop = drops[i];
+        
+        // Draw multiple characters in a trail
+        for (let j = 0; j < 5; j++) {
+          const trailY = drop.y - (j * charSize);
+          const trailOpacity = Math.max(0, 1 - (j * 0.2));
+          
+          ctx.globalAlpha = trailOpacity;
+          const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+          ctx.fillText(char, i * charSize, trailY);
+        }
+
+        // Move the drop down
+        drop.y += drop.speed;
+
+        // Reset if character goes off screen
+        if (drop.y > canvas.height) {
+          drop.y = -charSize;
+          drop.speed = Math.random() * 2 + 1;
+        }
+      }
+      
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+
+      requestAnimationFrame(drawMatrix);
+    }
+
+    drawMatrix();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    // Application logic
     const defaultCategories = [
       'ENTERTAINMENT STREAM',
       'COMMERCE NETWORK',
