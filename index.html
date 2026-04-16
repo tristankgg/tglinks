@@ -19,7 +19,6 @@
       overflow-x: hidden;
     }
 
-    /* Matrix code background animation */
     #matrixBackground {
       position: fixed;
       top: 0;
@@ -30,7 +29,6 @@
       opacity: 0.15;
     }
 
-    /* Scanlines overlay */
     body::before {
       content: '';
       position: fixed;
@@ -185,6 +183,7 @@
       position: relative;
       z-index: 2;
       min-height: 60px;
+      justify-content: flex-start;
     }
 
     .category-title {
@@ -198,6 +197,7 @@
       letter-spacing: 1px;
       width: 100%;
       margin-bottom: 0.8rem;
+      order: 1;
     }
 
     .category-icon {
@@ -208,7 +208,7 @@
       justify-content: center;
       border: 2px solid #00ff00;
       border-radius: 2px;
-      font-size: 14px;
+      font-size: 16px;
       background: rgba(0, 255, 0, 0.1);
       box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
     }
@@ -219,6 +219,7 @@
       position: relative;
       z-index: 3;
       align-self: flex-start;
+      order: 2;
     }
 
     .icon-btn {
@@ -315,49 +316,55 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 12px;
-      cursor: pointer;
-      opacity: 0;
       transition: all 0.2s;
-    }
-
-    .edit-mode .link-delete-btn {
-      opacity: 1;
+      z-index: 10;
     }
 
     .link-delete-btn:hover {
       background: rgba(255, 0, 0, 0.6);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #00cc00;
+      padding: 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
     }
 
     .modal {
       display: none;
       position: fixed;
-      top: 0;
+      z-index: 100;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff00;
     }
 
     .modal.active {
       display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .modal-content {
-      background: rgba(0, 0, 0, 0.9);
-      border: 2px solid #00ff00;
-      border-radius: 2px;
+      background-color: #000000;
       padding: 2rem;
+      border: 2px solid #00ff00;
+      border-radius: 4px;
       max-width: 400px;
       width: 90%;
       box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
-      backdrop-filter: blur(10px);
     }
 
     .modal-title {
@@ -365,84 +372,76 @@
       margin-bottom: 1.5rem;
       color: #00ff00;
       text-shadow: 0 0 10px #00ff00;
+      letter-spacing: 1px;
     }
 
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .form-group label {
       display: block;
       margin-bottom: 0.5rem;
       color: #00ff00;
-      font-size: 0.9rem;
-      text-shadow: 0 0 5px #00ff00;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      padding: 0.8rem;
+      padding: 0.7rem;
       background: rgba(0, 255, 0, 0.05);
       border: 1px solid #00ff00;
       color: #00ff00;
       font-family: 'Orbitron', monospace;
       border-radius: 2px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .form-group input::placeholder {
-      color: #00aa00;
+      color: #006600;
     }
 
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      background: rgba(0, 255, 0, 0.1);
     }
 
     .modal-buttons {
       display: flex;
       gap: 1rem;
-      margin-top: 1.5rem;
+      justify-content: flex-end;
     }
 
     .modal-btn {
-      flex: 1;
-      padding: 0.8rem;
-      border: 1px solid #00ff00;
+      padding: 0.7rem 1.5rem;
       background: rgba(0, 255, 0, 0.1);
+      border: 1px solid #00ff00;
       color: #00ff00;
       cursor: pointer;
       border-radius: 2px;
       font-family: 'Orbitron', monospace;
       font-weight: 700;
       transition: all 0.2s;
-      text-shadow: 0 0 5px #00ff00;
     }
 
     .modal-btn:hover {
       background: rgba(0, 255, 0, 0.2);
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
     }
 
     .modal-btn.cancel {
+      background: rgba(255, 0, 0, 0.1);
       border-color: #ff0000;
       color: #ff0000;
-      background: rgba(255, 0, 0, 0.1);
-      text-shadow: 0 0 5px #ff0000;
     }
 
     .modal-btn.cancel:hover {
       background: rgba(255, 0, 0, 0.2);
-      box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 2rem;
-      color: #00aa00;
-      font-style: italic;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     }
 
     .dragging {
@@ -451,7 +450,6 @@
   </style>
 </head>
 <body>
-  <!-- Matrix code background canvas -->
   <canvas id="matrixBackground"></canvas>
 
   <div class="container">
@@ -467,13 +465,16 @@
     <div id="categoriesContainer" class="categories"></div>
   </div>
 
-  <!-- Add Link Modal -->
   <div class="modal" id="addLinkModal">
     <div class="modal-content">
-      <div class="modal-title">ADD NEW LINK</div>
+      <div class="modal-title">ADD LINK</div>
       <div class="form-group">
         <label>Link Name</label>
         <input type="text" id="linkName" placeholder="Enter link name">
+      </div>
+      <div class="form-group">
+        <label>Link URL</label>
+        <input type="text" id="linkUrl" placeholder="Enter URL">
       </div>
       <div class="form-group">
         <label>Category</label>
@@ -486,7 +487,6 @@
     </div>
   </div>
 
-  <!-- Edit Link Modal -->
   <div class="modal" id="editLinkModal">
     <div class="modal-content">
       <div class="modal-title">EDIT LINK</div>
@@ -496,7 +496,7 @@
       </div>
       <div class="form-group">
         <label>Link URL</label>
-        <input type="text" id="editLinkUrl" placeholder="Enter URL (e.g., https://example.com)">
+        <input type="text" id="editLinkUrl" placeholder="Enter URL">
       </div>
       <div class="form-group">
         <label>Category</label>
@@ -509,7 +509,6 @@
     </div>
   </div>
 
-  <!-- Edit Category Modal -->
   <div class="modal" id="editCategoryModal">
     <div class="modal-content">
       <div class="modal-title">EDIT CATEGORY</div>
@@ -525,96 +524,33 @@
   </div>
 
   <script>
-    // Matrix digital rain animation
     const canvas = document.getElementById('matrixBackground');
     const ctx = canvas.getContext('2d');
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-    const charSize = 20;
-    const columns = Math.ceil(canvas.width / charSize);
-    
-    // Initialize drops with random starting positions
-    const drops = Array(columns).fill(0).map(() => ({
-      y: Math.random() * canvas.height,
-      speed: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.5 + 0.5
-    }));
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const cols = Math.floor(canvas.width / 20);
+    const drops = Array(cols).fill(0);
 
     function drawMatrix() {
-      // Semi-transparent black background to create trail effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Set text properties
       ctx.fillStyle = '#00ff00';
-      ctx.font = `bold ${charSize}px 'Courier New', monospace`;
-      ctx.shadowColor = '#00ff00';
-      ctx.shadowBlur = 10;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
-
+      ctx.font = '16px monospace';
       for (let i = 0; i < drops.length; i++) {
-        const drop = drops[i];
-        
-        // Draw multiple characters in a trail
-        for (let j = 0; j < 5; j++) {
-          const trailY = drop.y - (j * charSize);
-          const trailOpacity = Math.max(0, 1 - (j * 0.2));
-          
-          ctx.globalAlpha = trailOpacity;
-          const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-          ctx.fillText(char, i * charSize, trailY);
-        }
-
-        // Move the drop down
-        drop.y += drop.speed;
-
-        // Reset if character goes off screen
-        if (drop.y > canvas.height) {
-          drop.y = -charSize;
-          drop.speed = Math.random() * 2 + 1;
-        }
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * 20, drops[i] * 20);
+        if (drops[i] * 20 > canvas.height && Math.random() > 0.9) drops[i] = 0;
+        drops[i]++;
       }
-      
-      ctx.globalAlpha = 1;
-      ctx.shadowBlur = 0;
-
-      requestAnimationFrame(drawMatrix);
     }
 
-    drawMatrix();
-
-    // Handle window resize
+    setInterval(drawMatrix, 60);
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
-
-    // Application logic
-    const defaultCategories = [
-      '🔗 Main',
-      '📺 Entertainment',
-      '🛒 Commerce',
-      '🎮 Gaming',
-      '📄 Documents',
-      '💻 Development',
-      '⚙️ Utility',
-      '💰 Finance & Home'
-    ];
-
-    const categoryIcons = {
-      '🔗 Main': '🔗',
-      '📺 Entertainment': '📺',
-      '🛒 Commerce': '🛒',
-      '🎮 Gaming': '🎮',
-      '📄 Documents': '📄',
-      '💻 Development': '💻',
-      '⚙️ Utility': '⚙️',
-      '💰 Finance & Home': '💰'
-    };
 
     const defaultLinks = {
       '🔗 Main': [
@@ -681,18 +617,15 @@
     let editMode = false;
     let data = JSON.parse(localStorage.getItem('matrixLinks')) || JSON.parse(JSON.stringify(defaultLinks));
     
-    // Ensure all default categories exist in data
-    defaultCategories.forEach(category => {
+    Object.keys(defaultLinks).forEach(category => {
       if (!data[category]) {
         data[category] = defaultLinks[category] || [];
       }
     });
     
-    // Migrate old string format to new object format
     Object.keys(data).forEach(category => {
       data[category] = data[category].map(item => {
         if (typeof item === 'string') {
-          // Find matching link in defaultLinks
           const defaultLink = defaultLinks[category] && defaultLinks[category].find(l => l.name === item);
           return defaultLink || {name: item, url: '#'};
         }
@@ -722,8 +655,8 @@
         const titleDiv = document.createElement('div');
         titleDiv.className = 'category-title';
         titleDiv.innerHTML = `
-          <div class="category-icon">${categoryIcons[category] || '🔗'}</div>
-          ${category}
+          <div class="category-icon">${category.charAt(0)}</div>
+          ${category.substring(2)}
         `;
         
         const controlsDiv = document.createElement('div');
@@ -792,7 +725,6 @@
               if (editMode) {
                 e.preventDefault();
               }
-              // Allow normal link navigation when not in edit mode
             };
             
             linksGrid.appendChild(linkBtn);
@@ -849,6 +781,7 @@
 
     function addLink() {
       const name = document.getElementById('linkName').value.trim();
+      const url = document.getElementById('linkUrl').value.trim();
       const category = document.getElementById('linkCategory').value;
       
       if (!name) {
@@ -857,11 +790,12 @@
       }
       
       if (!data[category]) data[category] = [];
-      data[category].push({name: name, url: '#'});
+      data[category].push({name: name, url: url || '#'});
       saveData();
       renderCategories();
       
       document.getElementById('linkName').value = '';
+      document.getElementById('linkUrl').value = '';
       document.getElementById('addLinkModal').classList.remove('active');
     }
 
@@ -897,12 +831,10 @@
       const newLinkObject = {name: newName, url: newUrl || '#'};
       
       if (newCategory !== category) {
-        // Moving to a different category
         data[category].splice(index, 1);
         if (!data[newCategory]) data[newCategory] = [];
         data[newCategory].push(newLinkObject);
       } else {
-        // Updating in same category
         data[category][index] = newLinkObject;
       }
       
@@ -924,15 +856,8 @@
       const { oldCategory } = currentEditCategory;
       
       if (newCategoryName !== oldCategory) {
-        // Rename the category
         data[newCategoryName] = data[oldCategory];
         delete data[oldCategory];
-        
-        // Update categoryIcons if it exists
-        if (categoryIcons[oldCategory]) {
-          categoryIcons[newCategoryName] = categoryIcons[oldCategory];
-          delete categoryIcons[oldCategory];
-        }
       }
       
       saveData();
@@ -941,12 +866,12 @@
       currentEditCategory = null;
     }
 
-    // Event listeners
     document.getElementById('editToggle').addEventListener('click', toggleEditMode);
     document.getElementById('addLinkBtn').addEventListener('click', addLink);
     document.getElementById('cancelAddBtn').addEventListener('click', () => {
       document.getElementById('addLinkModal').classList.remove('active');
       document.getElementById('linkName').value = '';
+      document.getElementById('linkUrl').value = '';
     });
     document.getElementById('saveLinkBtn').addEventListener('click', saveEditLink);
     document.getElementById('cancelEditBtn').addEventListener('click', () => {
@@ -954,30 +879,25 @@
       currentEditLink = null;
       currentEditCategory = null;
     });
-
-    document.getElementById('linkName').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') addLink();
-    });
-
-    document.getElementById('editLinkName').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') saveEditLink();
-    });
-
-    document.getElementById('editLinkUrl').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') saveEditLink();
-    });
-
     document.getElementById('saveCategoryBtn').addEventListener('click', saveEditCategory);
     document.getElementById('cancelCategoryBtn').addEventListener('click', () => {
       document.getElementById('editCategoryModal').classList.remove('active');
       currentEditCategory = null;
     });
 
+    document.getElementById('linkName').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') addLink();
+    });
+    document.getElementById('editLinkName').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') saveEditLink();
+    });
+    document.getElementById('editLinkUrl').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') saveEditLink();
+    });
     document.getElementById('editCategoryName').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') saveEditCategory();
     });
 
-    // Initial render
     renderCategories();
   </script>
 </body>
